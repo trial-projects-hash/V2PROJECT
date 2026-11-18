@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#172554">
+<title>Ponte en mis zapatos | Juego de empatía</title>
+<style>
+:root{--navy:#172554;--teal:#0f9f91;--yellow:#facc15;--coral:#fb7185;--bg:#f4f7fb;--ink:#172033;--muted:#64748b;--white:#fff;--line:#e2e8f0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+header{background:linear-gradient(120deg,#172554,#155e75);color:white;padding:28px 18px 34px}
+.wrap{max-width:980px;margin:auto;padding:0 18px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center}.brand{font-size:.82rem;letter-spacing:.12em;font-weight:800;color:#99f6e4}.pill{border:1px solid #ffffff55;border-radius:99px;padding:6px 11px;font-size:.8rem}
+h1{font-size:clamp(2rem,6vw,3.5rem);line-height:1.05;margin:24px 0 12px;max-width:720px}header p{max-width:680px;color:#e0f2fe;margin:0}
+main{padding:24px 0 56px}.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:clamp(18px,4vw,30px);box-shadow:0 8px 30px #1725540a;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.stat{background:#f8fafc;border-radius:14px;padding:12px;text-align:center}.stat strong{display:block;font-size:1.35rem;color:var(--navy)}.stat span{font-size:.78rem;color:var(--muted)}
+h2{color:var(--navy);margin:0 0 10px;font-size:1.45rem}h3{margin:0 0 8px;color:var(--navy)}.muted{color:var(--muted)}.small{font-size:.88rem}
+button,input,textarea{font:inherit}button{border:0;border-radius:12px;padding:12px 18px;font-weight:750;cursor:pointer;transition:.15s}button:hover{transform:translateY(-1px)}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2dd4bf;outline-offset:2px}
+.primary{background:var(--teal);color:white}.secondary{background:#e2e8f0;color:var(--navy)}.warning{background:#fff1f2;color:#9f1239}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+input[type=text],textarea{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:12px;background:white}textarea{min-height:105px;resize:vertical}
+label.field{display:block;font-weight:700;margin:14px 0 7px}.missions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
+.mission-card{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff}.mission-card.done{border-color:#5eead4;background:#f0fdfa}.mission-card.locked{opacity:.58}.mission-card .num{font-size:.75rem;font-weight:800;color:var(--teal);letter-spacing:.08em}.mission-card h3{margin:5px 0}.mission-card p{font-size:.88rem;color:var(--muted);min-height:42px}.mission-card button{width:100%;margin-top:8px}
+.progress{height:10px;background:#e2e8f0;border-radius:20px;overflow:hidden;margin:10px 0}.progress>div{height:100%;background:var(--teal);width:0%;transition:width .3s}
+.scene{background:#eff6ff;border-left:4px solid #38bdf8;padding:16px;border-radius:12px;margin:16px 0}
+.option{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;margin:9px 0;cursor:pointer;background:#fff}.option:has(input:checked){border-color:var(--teal);background:#f0fdfa}.option input{margin-top:5px;accent-color:var(--teal)}
+.feedback{padding:14px;border-radius:12px;margin-top:14px;background:#f0fdfa;border:1px solid #99f6e4}.feedback.bad{background:#fff7ed;border-color:#fed7aa}
+.badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}.badge{background:#f1f5f9;border-radius:12px;padding:9px 12px;font-size:.84rem}.badge.earned{background:#fef9c3;border:1px solid #fde047}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px}
+.hidden{display:none!important}
+@media(max-width:560px){.stats{grid-template-columns:1fr 1fr}.top{align-items:flex-start;flex-direction:column}.actions button{flex:1}}
+@media print{header,.no-print,footer{display:none!important}body{background:white}.panel{box-shadow:none;border:0}.wrap{max-width:none}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <div class="top"><div class="brand">MISIÓN SOCIOEMOCIONAL</div><div class="pill">⏱ 30–40 minutos · 5 desafíos</div></div>
+  <h1>Ponte en mis zapatos</h1>
+  <p>Un desafío para comprender a los demás. Observa, escucha, cambia de perspectiva y descubre cómo tus decisiones pueden transformar una situación.</p>
+ </div>
+</header>
+<main class="wrap">
+ <section id="start" class="panel">
+  <h2>¡Bienvenidos a la aventura!</h2>
+  <p>La empatía es la capacidad de reconocer y considerar las emociones, necesidades y perspectivas de otras personas. Antes de juzgar, intenta comprender qué puede estar viviendo alguien más.</p>
+  <label class="field" for="team">Nombre del equipo o participante</label>
+  <input id="team" type="text" maxlength="45" placeholder="Ej. Los constructores de puentes">
+  <div class="stats">
+   <div class="stat"><strong>5</strong><span>Desafíos</span></div><div class="stat"><strong>100</strong><span>Puntos posibles</span></div><div class="stat"><strong>5</strong><span>Insignias</span></div>
+  </div>
+  <h3>¿Cómo jugar?</h3>
+  <ul class="small">
+   <li>Participen individualmente o en equipos de 3 a 5 personas.</li>
+   <li>Lean cada situación y conversen antes de responder.</li>
+   <li>Seleccionen una respuesta y escriban una reflexión.</li>
+   <li>Revisen la retroalimentación y aprendan de cada intento.</li>
+  </ul>
+  <p class="small muted">La puntuación combina una decisión guiada y una valoración de la reflexión. En modalidad grupal, el facilitador puede acordar el puntaje de reflexión con el equipo.</p>
+  <div class="actions"><button class="primary" id="startBtn">Comenzar mi aventura →</button><button class="secondary" id="continueBtn">Continuar partida guardada</button></div>
+ </section>
+
+ <section id="board" class="hidden">
+  <div class="panel">
+   <div class="top"><div><div class="muted small">EQUIPO / PARTICIPANTE</div><h2 id="teamName">Tu equipo</h2></div><div class="stat"><strong id="score">0</strong><span>puntos / 100</span></div></div>
+   <div class="progress"><div id="progressBar"></div></div>
+   <p class="small muted" id="progressText">0 de 5 desafíos completados</p>
+   <h3>Tablero de misiones</h3><div id="missionGrid" class="missions"></div>
+   <div class="badges" id="badgeList"></div>
+   <div class="actions no-print"><button class="secondary" id="resetBtn">Reiniciar juego</button></div>
+  </div>
+ </section>
+
+ <section id="game" class="panel hidden">
+  <div class="top"><div><div class="muted small" id="missionNumber">MISIÓN 1 DE 5</div><h2 id="missionTitle"></h2></div><div class="pill" style="color:#0f766e;border-color:#99f6e4">Máximo 20 puntos</div></div>
+  <p class="muted" id="missionSkill"></p>
+  <div class="scene"><strong>Situación</strong><p id="scenario" style="margin:6px 0 0"></p></div>
+  <h3 id="challengeTitle">Tu desafío</h3><p id="challengeText"></p>
+  <div id="activity"></div>
+  <label class="field" for="reflection" id="reflectionLabel">Tu reflexión</label>
+  <textarea id="reflection" placeholder="Explica cómo actuarías y por qué..."></textarea>
+  <p class="small muted">La reflexión se valora con una rúbrica: 0 puntos (no responde o no aborda el reto), 5 puntos (respuesta relacionada pero poco desarrollada), 10 puntos (respuesta considerada, respetuosa y justificada). En equipo, acuerden la valoración con el facilitador.</p>
+  <div class="actions"><button class="primary" id="checkBtn">Revisar respuesta</button><button class="secondary" id="backBtn">Volver al tablero</button></div>
+  <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+  <div id="scoring" class="hidden">
+   <label class="field" for="reflectionScore">Puntaje de reflexión</label>
+   <select id="reflectionScore" style="padding:11px;border:1px solid #cbd5e1;border-radius:10px;width:100%">
+    <option value="0">0 puntos — No responde al reto</option><option value="5">5 puntos — Respuesta relacionada, falta profundizar</option><option value="10">10 puntos — Reflexión empática y justificada</option>
+   </select>
+   <p class="small muted">En modalidad individual, selecciona honestamente el nivel alcanzado. En modalidad grupal, puede hacerlo el facilitador.</p>
+   <div class="actions"><button class="primary" id="completeBtn">Guardar misión y obtener insignia</button></div>
+  </div>
+ </section>
+
+ <section id="finish" class="panel hidden">
+  <h2>🎉 ¡Felicidades! Has completado el desafío</h2>
+  <p id="finishMessage"></p>
+  <div class="stats"><div class="stat"><strong id="finalScore">0</strong><span>Puntuación final</span></div><div class="stat"><strong>5/5</strong><span>Desafíos completados</span></div><div class="stat"><strong>5</strong><span>Insignias obtenidas</span></div></div>
+  <div class="badges" id="finalBadges"></div>
+  <h3>Tu reconocimiento</h3><p id="rank"></p>
+  <p><strong>Recuerda:</strong> La empatía no consiste en pensar igual que los demás, sino en aprender a comprender lo que pueden estar viviendo. Antes de juzgar, escucha; antes de responder, comprende; y antes de actuar, ponte en los zapatos del otro.</p>
+  <div class="actions no-print"><button class="primary" onclick="window.print()">Imprimir / guardar certificado</button><button class="secondary" id="playAgainBtn">Volver a jugar</button></div>
+  <div class="small muted">Certificado de participación · Ponte en mis zapatos</div>
+ </section>
+</main>
+<footer>Juego educativo · Competencia socioemocional: Empatía</footer>
+<script>
+const missions = [
+ {title:"Detectives de emociones",skill:"Insignia: Reconocimiento emocional",badge:"🔎 Reconocimiento emocional",scenario:"Un compañero llega al ambiente de formación, se sienta solo y no participa en las actividades grupales.",challenge:"Selecciona tres emociones que podría estar experimentando. Recuerda: no podemos saber con certeza qué siente una persona solo por observarla.",type:"multi",options:["Tristeza","Preocupación","Timidez","Cansancio","Frustración","Miedo","Tranquilidad","Alegría"],correct:[0,1,2,3,4,5,6,7],feedback:"Puede experimentar tristeza, preocupación, timidez, cansancio u otras emociones. Ninguna señal confirma por sí sola lo que siente. Lo empático es acercarse con respeto y preguntar sin presionar.",question:"¿Cómo podrías acercarte a él sin hacerlo sentir incómodo?",placeholder:"Ej. Me acercaría con amabilidad y le preguntaría si quiere compañía...",kind:"emotions"},
+ {title:"Cambia de perspectiva",skill:"Insignia: Comprensión",scenario:"Un integrante del equipo no entrega a tiempo la parte del trabajo que le correspondía.",challenge:"Selecciona tres perspectivas que conviene considerar para comprender la situación.",type:"multi",options:["El compañero puede estar enfrentando una dificultad personal o no haber comprendido la tarea.","El equipo puede sentirse preocupado porque depende de esa entrega.","El instructor necesita conocer qué ocurrió y cómo se asumirá la responsabilidad.","Lo hizo porque no le importa nadie.","No hay nada que conversar: debe ser excluido."],correct:[0,1,2],feedback:"Considerar las circunstancias del compañero, las necesidades del equipo y la responsabilidad frente al instructor permite comprender mejor la situación. Comprender no significa justificar automáticamente el incumplimiento.",question:"¿Qué circunstancias podrían explicar su comportamiento?",placeholder:"Describe posibilidades sin asumir que conoces la historia completa...",kind:"perspectives"},
+ {title:"Escucha con el corazón",skill:"Insignia: Escucha activa",scenario:"Una compañera expresa que se siente desmotivada porque tiene dificultades económicas y está pensando en abandonar su formación.",challenge:"¿Cuál respuesta demuestra escucha activa, comprensión y apoyo?",type:"single",options:["No te preocupes, eso no es tan grave. Hay personas con problemas peores.","Si realmente quisieras estudiar, encontrarías la manera de hacerlo.","Entiendo que estés pasando por un momento difícil. ¿Quieres contarme un poco más? Quizás podamos buscar alguna alternativa juntos.","Yo que tú dejaría de preocuparme y seguiría estudiando."],correct:[2],feedback:"Esta respuesta valida lo que siente, ofrece escuchar sin presionar y propone apoyo sin imponer una solución. Evita minimizar sus dificultades o comparar su situación con la de otras personas.",question:"¿Qué podrías decirle para que se sienta escuchada y comprendida?",placeholder:"Escribe un mensaje respetuoso y cercano para tu compañera...",kind:"listening"},
+ {title:"Decisiones que construyen",skill:"Insignia: Respeto",scenario:"En un grupo de WhatsApp, varios compañeros realizan comentarios negativos sobre un aprendiz que cometió un error durante una exposición.",challenge:"¿Cómo actuarías ante esta situación?",type:"single",options:["Unirme a las burlas para evitar quedar excluido del grupo.","No intervenir y permitir que continúen los comentarios.","Pedir respetuosamente que detengan los comentarios y recordar que todos podemos cometer errores.","Compartir la conversación con otros grupos para que más personas opinen."],correct:[2],feedback:"Pedir que se detengan los comentarios ayuda a proteger la dignidad de la persona y promueve un ambiente seguro. La empatía también implica actuar respetuosamente cuando alguien está siendo afectado.",question:"¿Qué consecuencias pueden tener nuestras palabras y acciones sobre los sentimientos de los demás?",placeholder:"Explica cómo pueden afectar las burlas y qué alternativa respetuosa propones...",kind:"respect"},
+ {title:"Construyendo puentes",skill:"Insignia: Solidaridad",scenario:"Dos integrantes de un equipo tienen opiniones diferentes y comienzan a discutir, afectando el desarrollo de una actividad.",challenge:"Ordena mentalmente estos pasos y selecciona la secuencia más adecuada para resolver el conflicto.",type:"order",options:["Escuchar a ambas personas sin interrumpir.","Reconocer las emociones y necesidades de cada integrante.","Buscar alternativas que consideren ambos puntos de vista.","Llegar a un acuerdo y establecer compromisos."],correct:[0,1,2,3],feedback:"Una solución empática comienza escuchando, reconoce las necesidades de las personas, explora alternativas y termina con acuerdos claros. No se trata de imponer una opinión, sino de construir una salida conjunta.",question:"¿Cómo puedes ayudar a resolver un conflicto sin imponer tu opinión?",placeholder:"Propón una solución que permita escuchar a ambas personas y llegar a un acuerdo...",kind:"bridge"}
+];
+const $=id=>document.getElementById(id);
+let state={team:"",completed:{},answers:{},score:0,current:0};
+const save=()=>localStorage.setItem("zapatosGame",JSON.stringify(state));
+const load=()=>{try{const x=JSON.parse(localStorage.getItem("zapatosGame"));if(x&&x.completed)state=x}catch(e){}};
+function show(id){["start","board","game","finish"].forEach(x=>$(x).classList.toggle("hidden",x!==id));}
+function startGame(){state.team=$("team").value.trim()||"Mi equipo";save();renderBoard();show("board")}
+function renderBoard(){
+ $("teamName").textContent=state.team;$("score").textContent=state.score||0;
+ const done=Object.keys(state.completed).length;$("progressText").textContent=`${done} de 5 desafíos completados`;$("progressBar").style.width=(done*20)+"%";
+ $("missionGrid").innerHTML=missions.map((m,i)=>{let isDone=!!state.completed[i],unlocked=i===0||!!state.completed[i-1];return `<article class="mission-card ${isDone?'done':''} ${!unlocked?'locked':''}"><div class="num">MISIÓN ${i+1}</div><h3>${m.title}</h3><p>${m.skill}</p><div class="small">${isDone?'✓ Completada':unlocked?'Disponible':'🔒 Completa la misión anterior'}</div><button class="${isDone?'secondary':'primary'}" ${!unlocked?'disabled':''} onclick="openMission(${i})">${isDone?'Ver resultado':unlocked?'Iniciar desafío':'Bloqueada'}</button></article>`}).join("");
+ $("badgeList").innerHTML=missions.map((m,i)=>`<span class="badge ${state.completed[i]?'earned':''}">${state.completed[i]?'🏅':'○'} ${m.badge}</span>`).join("");
+ if(done===5)finishGame();
+}
+function openMission(i){
+ state.current=i;const m=missions[i];$("missionNumber").textContent=`MISIÓN ${i+1} DE 5`;$("missionTitle").textContent=m.title;$("missionSkill").textContent=m.skill;$("scenario").textContent=m.scenario;$("challengeText").textContent=m.challenge;$("reflectionLabel").textContent=m.question;$("reflection").value=state.answers[i]?.reflection||"";$("feedback").classList.add("hidden");$("scoring").classList.add("hidden");$("checkBtn").classList.remove("hidden");$("reflection").disabled=false;
+ const old=state.answers[i];let html="";
+ if(m.type==="multi"||m.type==="single"){html=m.options.map((o,j)=>`<label class="option"><input type="${m.type==='multi'?'checkbox':'radio'}" name="answer" value="${j}" ${old&&(m.type==='multi'?old.selected.includes(j):old.selected===j)?'checked':''}><span>${o}</span></label>`).join("")}
+ else {html='<p class="small muted">Selecciona cada paso en el orden correcto usando los números.</p>'+m.options.map((o,j)=>`<label class="field">${o}</label><select class="orderSelect" data-index="${j}" style="padding:10px;border:1px solid #cbd5e1;border-radius:9px;width:100%;margin-bottom:8px"><option value="">Posición...</option>${[1,2,3,4].map(n=>`<option value="${n}" ${old&&old.order[j]===n?'selected':''}>${n}</option>`).join("")}</select>`).join("")}
+ $("activity").innerHTML=html;show("game");
+}
+function getSelection(m){
+ if(m.type==="multi")return [...document.querySelectorAll('input[name="answer"]:checked')].map(x=>+x.value);
+ if(m.type==="single"){let x=document.querySelector('input[name="answer"]:checked');return x?+x.value:null}
+ return [...document.querySelectorAll(".orderSelect")].map(x=>x.value?+x.value:0);
+}
+function checkAnswer(){
+ const m=missions[state.current],selected=getSelection(m),reflection=$("reflection").value.trim();
+ if(!reflection){alert("Escribe tu reflexión antes de revisar la respuesta.");$("reflection").focus();return}
+ if(m.type==="single"&&selected===null){alert("Selecciona una respuesta.");return}
+ if(m.type==="multi"&&selected.length===0){alert("Selecciona al menos una opción.");return}
+ if(m.type==="order"&&(selected.some(x=>!x)||new Set(selected).size!==4)){alert("Asigna una posición diferente a cada paso.");return}
+ let correct=false,earned=0;
+ if(m.type==="single"){correct=selected===m.correct[0];earned=correct?10:0}
+ else if(m.type==="multi"){correct=state.current===0?selected.length>=1:selected.length===3&&m.correct.every(x=>selected.includes(x));earned=correct?10:Math.max(0,Math.round(10*selected.filter(x=>m.correct.includes(x)).length/m.correct.length))}
+ else {correct=selected.every((v,i)=>v===i+1);earned=correct?10:0}
+ state.answers[state.current]={selected: m.type==="order"?selected:m.type==="multi"?selected:selected,reflection,objective:earned};
+ $("feedback").classList.remove("hidden");$("feedback").classList.toggle("bad",!correct);
+ $("feedback").innerHTML=`<strong>${correct?'¡Muy bien!':'Buen intento: revisemos juntos'}</strong><p>${m.feedback}</p><p><strong>Resultado de la actividad:</strong> ${earned}/10 puntos. ${correct?'Has identificado una respuesta adecuada.':'Puedes aprender de esta situación y mejorar tu análisis.'}</p>`;
+ $("checkBtn").classList.add("hidden");$("scoring").classList.remove("hidden");$("reflectionScore").value="5";save();
+}
+function completeMission(){
+ const i=state.current,m=missions[i],a=state.answers[i];if(!a){return}
+ a.reflectionScore=+$("reflectionScore").value;a.total=a.objective+a.reflectionScore;
+ state.completed[i]={score:a.total,badge:m.badge};state.score=Object.values(state.completed).reduce((s,x)=>s+x.score,0);save();renderBoard();show("board");
+}
+function finishGame(){
+ $("finishMessage").textContent=`${state.team}, completaste las cinco misiones y reuniste todas las insignias.`;$("finalScore").textContent=state.score;$("finalBadges").innerHTML=missions.map(m=>`<span class="badge earned">🏅 ${m.badge}</span>`).join("");
+ let s=state.score;$("rank").textContent=s>=90?"Embajador de la empatía":s>=75?"Constructor de puentes":s>=60?"Explorador de emociones":"Aprendiz de empatía";
+ show("finish");
+}
+function resetGame(){if(!confirm("¿Seguro que deseas borrar el progreso y comenzar de nuevo?"))return;localStorage.removeItem("zapatosGame");state={team:"",completed:{},answers:{},score:0,current:0};$("team").value="";show("start");$("continueBtn").classList.add("hidden")}
+$("startBtn").addEventListener("click",startGame);
+$("continueBtn").addEventListener("click",()=>{load();if(!state.team){alert("No hay una partida guardada.");return}renderBoard();show("board")});
+$("checkBtn").addEventListener("click",checkAnswer);$("completeBtn").addEventListener("click",completeMission);
+$("backBtn").addEventListener("click",()=>{renderBoard();show("board")});
+$("resetBtn").addEventListener("click",resetGame);$("playAgainBtn").addEventListener("click",resetGame);
+load();if(state.team){$("continueBtn").classList.remove("hidden");$("team").value=state.team}else $("continueBtn").classList.add("hidden");
+</script>
+</body>
+</html>
